@@ -7,7 +7,7 @@ block_size = 64
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load tokenizer and model
-data, tokenizer = load_dataset("data/genz.txt", block_size=block_size)
+data, tokenizer = load_dataset(block_size=block_size)
 
 model = TinyTransformer(
     vocab_size=tokenizer.vocab_size,

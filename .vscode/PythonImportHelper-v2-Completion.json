@@ -1,0 +1,407 @@
+[
+    {
+        "label": "torch",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch",
+        "description": "torch",
+        "detail": "torch",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "data_loader",
+        "description": "data_loader",
+        "isExtraImport": true,
+        "detail": "data_loader",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "data_loader",
+        "description": "data_loader",
+        "isExtraImport": true,
+        "detail": "data_loader",
+        "documentation": {}
+    },
+    {
+        "label": "TinyTransformer",
+        "importPath": "model",
+        "description": "model",
+        "isExtraImport": true,
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "TinyTransformer",
+        "importPath": "model",
+        "description": "model",
+        "isExtraImport": true,
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "torch.nn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch.nn",
+        "description": "torch.nn",
+        "detail": "torch.nn",
+        "documentation": {}
+    },
+    {
+        "label": "torch.nn.functional",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "torch.nn.functional",
+        "description": "torch.nn.functional",
+        "detail": "torch.nn.functional",
+        "documentation": {}
+    },
+    {
+        "label": "DataLoader",
+        "importPath": "torch.utils.data",
+        "description": "torch.utils.data",
+        "isExtraImport": true,
+        "detail": "torch.utils.data",
+        "documentation": {}
+    },
+    {
+        "label": "tqdm",
+        "importPath": "tqdm",
+        "description": "tqdm",
+        "isExtraImport": true,
+        "detail": "tqdm",
+        "documentation": {}
+    },
+    {
+        "label": "CharDataset",
+        "importPath": "dataset",
+        "description": "dataset",
+        "isExtraImport": true,
+        "detail": "dataset",
+        "documentation": {}
+    },
+    {
+        "label": "gradio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "gradio",
+        "description": "gradio",
+        "detail": "gradio",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "importPath": "src.data_loader",
+        "description": "src.data_loader",
+        "isExtraImport": true,
+        "detail": "src.data_loader",
+        "documentation": {}
+    },
+    {
+        "label": "TinyTransformer",
+        "importPath": "src.model",
+        "description": "src.model",
+        "isExtraImport": true,
+        "detail": "src.model",
+        "documentation": {}
+    },
+    {
+        "label": "CharDataset",
+        "kind": 6,
+        "importPath": "src.dataset",
+        "description": "src.dataset",
+        "peekOfCode": "class CharDataset(torch.utils.data.Dataset):\n    def __init__(self, data, block_size):\n        self.data = data\n        self.block_size = block_size\n    def __len__(self):\n        return len(self.data) - self.block_size\n    def __getitem__(self, idx):\n        x = self.data[idx:idx+self.block_size]\n        y = self.data[idx+1:idx+self.block_size+1]\n        return x, y",
+        "detail": "src.dataset",
+        "documentation": {}
+    },
+    {
+        "label": "CharTokenizer",
+        "kind": 6,
+        "importPath": "src.data_loader",
+        "description": "src.data_loader",
+        "peekOfCode": "class CharTokenizer:\n    def __init__(self, text):\n        self.chars = sorted(list(set(text)))\n        self.vocab_size = len(self.chars)\n        self.stoi = {ch: i for i, ch in enumerate(self.chars)}\n        self.itos = {i: ch for ch, i in self.stoi.items()}\n    def encode(self, s):\n        return [self.stoi[c] for c in s if c in self.stoi]\n    def decode(self, ids):\n        if isinstance(ids, torch.Tensor):",
+        "detail": "src.data_loader",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "kind": 2,
+        "importPath": "src.data_loader",
+        "description": "src.data_loader",
+        "peekOfCode": "def load_dataset(file_path=\"data/conversations.txt\", block_size=64):\n    with open(file_path, 'r', encoding='utf-8') as f:\n        text = f.read()\n    tokenizer = CharTokenizer(text)\n    data = torch.tensor(tokenizer.encode(text), dtype=torch.long)\n    return data, tokenizer",
+        "detail": "src.data_loader",
+        "documentation": {}
+    },
+    {
+        "label": "block_size",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "block_size = 64\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "device = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "model = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)\nmodel.load_state_dict(torch.load(\"genz_model.pt\", map_location=device))\nmodel.eval()\n# Prompt the model with an initial string",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "start_prompt",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "start_prompt = \"rizz\"\nstart_ids = tokenizer.encode(start_prompt)\ncontext = torch.tensor([start_ids], dtype=torch.long).to(device)\n# Generate text\nwith torch.no_grad():\n    generated_ids = model.generate(context, max_new_tokens=250)[0].tolist()\n# Decode and print the result\ngenerated_text = tokenizer.decode(generated_ids)\nprint(\"\\n🧠 Gen Z Bot says:\\n\")\nprint(generated_text)",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "start_ids",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "start_ids = tokenizer.encode(start_prompt)\ncontext = torch.tensor([start_ids], dtype=torch.long).to(device)\n# Generate text\nwith torch.no_grad():\n    generated_ids = model.generate(context, max_new_tokens=250)[0].tolist()\n# Decode and print the result\ngenerated_text = tokenizer.decode(generated_ids)\nprint(\"\\n🧠 Gen Z Bot says:\\n\")\nprint(generated_text)",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "context",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "context = torch.tensor([start_ids], dtype=torch.long).to(device)\n# Generate text\nwith torch.no_grad():\n    generated_ids = model.generate(context, max_new_tokens=250)[0].tolist()\n# Decode and print the result\ngenerated_text = tokenizer.decode(generated_ids)\nprint(\"\\n🧠 Gen Z Bot says:\\n\")\nprint(generated_text)",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "generated_text",
+        "kind": 5,
+        "importPath": "src.generate",
+        "description": "src.generate",
+        "peekOfCode": "generated_text = tokenizer.decode(generated_ids)\nprint(\"\\n🧠 Gen Z Bot says:\\n\")\nprint(generated_text)",
+        "detail": "src.generate",
+        "documentation": {}
+    },
+    {
+        "label": "SelfAttentionHead",
+        "kind": 6,
+        "importPath": "src.model",
+        "description": "src.model",
+        "peekOfCode": "class SelfAttentionHead(nn.Module):\n    def __init__(self, head_size, embed_dim, block_size):\n        super().__init__()\n        self.key = nn.Linear(embed_dim, head_size)\n        self.query = nn.Linear(embed_dim, head_size)\n        self.value = nn.Linear(embed_dim, head_size)\n        self.proj = nn.Linear(head_size, embed_dim)  # Fix here\n        self.tril = torch.tril(torch.ones(block_size, block_size))\n        self.dropout = nn.Dropout(0.1)\n    def forward(self, x):",
+        "detail": "src.model",
+        "documentation": {}
+    },
+    {
+        "label": "TransformerBlock",
+        "kind": 6,
+        "importPath": "src.model",
+        "description": "src.model",
+        "peekOfCode": "class TransformerBlock(nn.Module):\n    def __init__(self, embed_dim, head_size, block_size):\n        super().__init__()\n        self.sa = SelfAttentionHead(head_size, embed_dim, block_size)\n        self.ffwd = nn.Sequential(\n            nn.Linear(embed_dim, 4 * embed_dim),\n            nn.ReLU(),\n            nn.Linear(4 * embed_dim, embed_dim),\n        )\n        self.ln1 = nn.LayerNorm(embed_dim)",
+        "detail": "src.model",
+        "documentation": {}
+    },
+    {
+        "label": "TinyTransformer",
+        "kind": 6,
+        "importPath": "src.model",
+        "description": "src.model",
+        "peekOfCode": "class TinyTransformer(nn.Module):\n    def __init__(self, vocab_size, block_size, n_embed=128, n_heads=4, n_layers=4):\n        super().__init__()\n        self.block_size = block_size\n        self.token_embedding_table = nn.Embedding(vocab_size, n_embed)\n        self.position_embedding_table = nn.Embedding(block_size, n_embed)\n        self.blocks = nn.Sequential(*[\n            TransformerBlock(n_embed, n_embed // n_heads, block_size)\n            for _ in range(n_layers)\n        ])",
+        "detail": "src.model",
+        "documentation": {}
+    },
+    {
+        "label": "block_size",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "block_size = 64\nbatch_size = 32\nmax_iters = 2000\neval_interval = 200\nlearning_rate = 3e-4\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "batch_size",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "batch_size = 32\nmax_iters = 2000\neval_interval = 200\nlearning_rate = 3e-4\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "max_iters",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "max_iters = 2000\neval_interval = 200\nlearning_rate = 3e-4\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "eval_interval",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "eval_interval = 200\nlearning_rate = 3e-4\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "learning_rate",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "learning_rate = 3e-4\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "device = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load data and tokenizer\ndata, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nsplit = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "split",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "split = int(0.9 * len(data))\ntrain_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "train_data",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "train_data = data[:split]\nval_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "val_data",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "val_data = data[split:]\ntrain_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "train_dataset",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "train_dataset = CharDataset(train_data, block_size)\nval_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "val_dataset",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "val_dataset = CharDataset(val_data, block_size)\ntrain_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "train_loader",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\nval_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "val_loader",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "val_loader = DataLoader(val_dataset, batch_size=batch_size)\n# Model\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)\noptimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "model = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)\noptimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)\n# Training loop\nfor iter in range(max_iters):",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "optimizer",
+        "kind": 5,
+        "importPath": "src.train",
+        "description": "src.train",
+        "peekOfCode": "optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)\n# Training loop\nfor iter in range(max_iters):\n    model.train()\n    for xb, yb in train_loader:\n        xb, yb = xb.to(device), yb.to(device)\n        logits, loss = model(xb, yb)\n        optimizer.zero_grad()\n        loss.backward()\n        optimizer.step()",
+        "detail": "src.train",
+        "documentation": {}
+    },
+    {
+        "label": "genz_reply",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def genz_reply(message, history):\n    message = \"User: \" + message.lower()  # prefix with conversation tag\n    encoded = tokenizer.encode(message)[-block_size:]\n    idx = torch.tensor([encoded], dtype=torch.long).to(device)\n    with torch.no_grad():\n        out = model.generate(idx, max_new_tokens=150)[0]\n    decoded = tokenizer.decode(out)\n    if \"Bot:\" in decoded:\n        decoded = decoded.split(\"Bot:\", 1)[1]\n    return decoded.strip()",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "block_size",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "block_size = 64\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\n_, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "device",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "device = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\n_, tokenizer = load_dataset(\"data/conversations.txt\", block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "model = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)\nmodel.load_state_dict(torch.load(\"genz_model.pt\", map_location=device))\nmodel.eval()\n# Generation function",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "chat",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "chat = gr.ChatInterface(fn=genz_reply, title=\"🧠 Gen Z LLM\", description=\"Talk to your local rizzbot 🧃\")\nchat.launch()",
+        "detail": "app",
+        "documentation": {}
+    }
+]

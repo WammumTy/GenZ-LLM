@@ -82,4 +82,3 @@ class TinyTransformer(nn.Module):
             next_id = torch.multinomial(probs, num_samples=1)
             idx = torch.cat((idx, next_id), dim=1)
         return idx
-        return idx

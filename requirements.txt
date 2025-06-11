@@ -1,0 +1,9 @@
+# requirements.txt
+torch==2.2.2
+torchvision
+torchaudio
+tqdm
+gradio
+
+# NOTE: Install torch manually with:
+# pip install torch==2.2.2+cu118 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
