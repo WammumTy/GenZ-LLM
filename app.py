@@ -9,7 +9,7 @@ block_size = 64
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load tokenizer and model
-_, tokenizer = load_dataset("data/genz.txt", block_size=block_size)
+_, tokenizer = load_dataset("data/conversations.txt", block_size=block_size)
 
 model = TinyTransformer(
     vocab_size=tokenizer.vocab_size,
@@ -24,15 +24,17 @@ model.eval()
 
 # Generation function
 def genz_reply(message, history):
-    message = message.lower()  # normalize case
+    message = "User: " + message.lower()  # prefix with conversation tag
     encoded = tokenizer.encode(message)[-block_size:]
     idx = torch.tensor([encoded], dtype=torch.long).to(device)
 
     with torch.no_grad():
         out = model.generate(idx, max_new_tokens=150)[0]
 
-    response = tokenizer.decode(out)
-    return response
+    decoded = tokenizer.decode(out)
+    if "Bot:" in decoded:
+        decoded = decoded.split("Bot:", 1)[1]
+    return decoded.strip()
 
 
 # Launch Gradio chatbot interface
