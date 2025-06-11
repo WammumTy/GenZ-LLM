@@ -139,7 +139,7 @@
         "kind": 5,
         "importPath": "src.generate",
         "description": "src.generate",
-        "peekOfCode": "block_size = 64\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4",
+        "peekOfCode": "block_size = 64\ndevice = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\n<<<<<<< HEAD\n=======\n# load_dataset defaults to data/conversations.txt\n>>>>>>> 61763c6bbacfa18d94ef1faddd79795f6ac41ae1\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,",
         "detail": "src.generate",
         "documentation": {}
     },
@@ -148,7 +148,7 @@
         "kind": 5,
         "importPath": "src.generate",
         "description": "src.generate",
-        "peekOfCode": "device = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,\n    n_embed=128,\n    n_heads=4,\n    n_layers=4\n).to(device)",
+        "peekOfCode": "device = 'cuda' if torch.cuda.is_available() else 'cpu'\n# Load tokenizer and model\n<<<<<<< HEAD\n=======\n# load_dataset defaults to data/conversations.txt\n>>>>>>> 61763c6bbacfa18d94ef1faddd79795f6ac41ae1\ndata, tokenizer = load_dataset(block_size=block_size)\nmodel = TinyTransformer(\n    vocab_size=tokenizer.vocab_size,\n    block_size=block_size,",
         "detail": "src.generate",
         "documentation": {}
     },
