@@ -17,7 +17,7 @@ class CharTokenizer:
         return ''.join(self.itos[i] for i in ids if i in self.itos)
 
 
-def load_dataset(file_path, block_size=64):
+def load_dataset(file_path="data/conversations.txt", block_size=64):
     with open(file_path, 'r', encoding='utf-8') as f:
         text = f.read()
     tokenizer = CharTokenizer(text)

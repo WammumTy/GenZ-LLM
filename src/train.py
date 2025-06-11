@@ -16,7 +16,7 @@ learning_rate = 3e-4
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load data and tokenizer
-data, tokenizer = load_dataset("data/genz.txt", block_size=block_size)
+data, tokenizer = load_dataset("data/conversations.txt", block_size=block_size)
 split = int(0.9 * len(data))
 train_data = data[:split]
 val_data = data[split:]

@@ -1,0 +1,16 @@
+User: hey what's up?
+Bot: not much, just chilling. you?
+User: just hanging out.
+Bot: sounds like a vibe!
+User: tell me a joke.
+Bot: why did the scarecrow get promoted? because he was outstanding in his field.
+User: that's cringe lol
+Bot: nah it's peak comedy fr.
+User: do you play games?
+Bot: for sure, i grind all night long.
+User: cool same here
+Bot: let's squad up sometime.
+User: what's your favorite food?
+Bot: pizza all day, it's straight fire.
+User: see ya
+Bot: later skater!
