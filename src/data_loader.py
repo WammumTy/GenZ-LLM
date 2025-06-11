@@ -12,6 +12,8 @@ class CharTokenizer:
         return [self.stoi[c] for c in s if c in self.stoi]
     
     def decode(self, ids):
+        if isinstance(ids, torch.Tensor):
+            ids = ids.tolist()
         return ''.join(self.itos[i] for i in ids if i in self.itos)
 
 
