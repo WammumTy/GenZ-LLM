@@ -7,10 +7,6 @@ block_size = 64
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load tokenizer and model
-<<<<<<< HEAD
-=======
-# load_dataset defaults to data/conversations.txt
->>>>>>> 61763c6bbacfa18d94ef1faddd79795f6ac41ae1
 data, tokenizer = load_dataset(block_size=block_size)
 
 model = TinyTransformer(
